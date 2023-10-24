@@ -71,6 +71,9 @@ namespace OculusKiller
                 {
                     Log("SteamVR vrserver not found. Exiting...");
                 }
+
+                // Monitor vrserver process
+                MonitorVRServer(vrServerPath, oculusPath);
             }
             catch (Exception e)
             {
@@ -168,6 +171,39 @@ namespace OculusKiller
         static void LogError(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private static void MonitorVRServer(string vrServerPath, string oculusPath)
+        {
+            if (string.IsNullOrEmpty(vrServerPath))
+            {
+                Log("Invalid vrserver path.");
+                return;
+            }
+
+            var vrServerProcess = Process.GetProcessesByName("vrserver").FirstOrDefault(process => process.MainModule.FileName == vrServerPath);
+            if (vrServerProcess != null)
+            {
+                Log("Monitoring vrserver process.");
+                vrServerProcess.EnableRaisingEvents = true;
+
+                vrServerProcess.Exited += (sender, e) =>
+                {
+                    Log("vrserver process exited.");
+                    KillOculusServer(oculusPath);
+                };
+
+                // Additional logging to check the status of vrserver
+                Log($"vrserver process status: {vrServerProcess.Responding}");
+                Log($"vrserver process start time: {vrServerProcess.StartTime}");
+                Log($"vrserver process total processor time: {vrServerProcess.TotalProcessorTime}");
+
+                vrServerProcess.WaitForExit();
+            }
+            else
+            {
+                Log("vrserver process not found.");
+            }
         }
     }
 }
