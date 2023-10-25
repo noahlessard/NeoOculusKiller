@@ -98,7 +98,7 @@ namespace OculusKiller
         }
 
         // Get the path for Oculus
-        static string GetOculusPath()
+        private static string GetOculusPath()
         {
             string oculusPath = Environment.GetEnvironmentVariable("OculusBase");
             if (string.IsNullOrEmpty(oculusPath))
@@ -153,7 +153,7 @@ namespace OculusKiller
         }
 
         // Kill the Oculus process
-        static void KillOculusServer(string oculusPath)
+        private static void KillOculusServer(string oculusPath)
         {
             var ovrServerProcess = Process.GetProcessesByName("OVRServer_x64").FirstOrDefault(process => process.MainModule.FileName == oculusPath);
             if (ovrServerProcess != null)
@@ -168,7 +168,7 @@ namespace OculusKiller
         }
 
         // Log errors and show a message box
-        static void LogError(string message)
+        private static void LogError(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
