@@ -61,3 +61,8 @@ DISCLAIMER: This workaround may prevent some SteamVR games from launching, make 
 - Turn on "Force Use SteamVR (Disable Oculus API [expiremental])"
 
 <img src="OVRSettingsFix.png" width="600" height="400" />
+
+
+## SteamVR 2.0 breaks input when in game
+
+If you are having an issue with the steamVR 2.0 detecting your input in the dashboard, but not in games, you need to update SteamVR to version 2.0.9, which might be in the beta section. Try going to Properites > Betas > SteamVR Beta, and make sure your steamVR updates and says it is atleast in version 2.0.9 when it launches.
