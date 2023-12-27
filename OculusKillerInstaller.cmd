@@ -77,6 +77,8 @@ if exist "%OCULUSDIR%\OculusDash.exe.bak" goto ALREADYON
 
 net stop OVRService
 
+
+:: Create backups, and then move the OculusKiller EXE in
 echo F|xcopy "%OCULUSDIR%\OculusDash.exe" "%~dp0\OculusDash.exe.bak" /f /i /y
 echo F|xcopy "%OCULUSDIR%\OculusDash.exe" "%OCULUSDIR%\OculusDash.exe.bak" /f /i /y
 del "%OCULUSDIR%\OculusDash.exe" /f
@@ -92,12 +94,17 @@ goto EXIT
 
 :ALREADYON
 echo.
-echo *************************************************************
-echo *** OculusKiller is already setup - REMOVING OculusKiller ***
-echo *************************************************************
+echo *************************************
+echo *** OculusKiller is already setup ***
+echo *************************************
 echo.
 
-del "%OCULUSDIR%\OculusDash.exe" /f
+set /P FIXRESULT3=Would you remove OculusKiller from the Oculus Directory?(Y/N)?
+if /i "%FIXRESULT3%"=="y" echo Continuing with removal...
+if /i "%FIXRESULT3%"=="n" goto EXIT
+
+:: Delete OculusKiller, and restore from backup in Oculus Dir, then delete backup
+del "%OCULUSDIR%\OculusDash.exe" /f 
 echo F|xcopy "%OCULUSDIR%\OculusDash.exe.bak" "%OCULUSDIR%\OculusDash.exe" /f /i /y
 del "%OCULUSDIR%\OculusDash.exe.bak" /f
 
