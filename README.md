@@ -19,7 +19,12 @@ This breaks Oculus based games, as in you might be able to launch Oculus games, 
 - Rename the original OculusDash.exe to OculusDash.exe.bak and move my replacement OculusDash.exe into the folder you just opened in Explorer.
 - Go back to Task Manager, look for OVRService again, right click on it and start it.
 
+Alternativly, you can use the installer. You still have to make sure the service is stopped, but then just run the .cmd as an adminstrator and it will install/remove the OculusKiller exe for you.
+
 Enjoy your completely yeeted Oculus Dash with SteamVR auto-start, and the extra performance!
+
+## Compile a fresh exe
+- Open the project in VScode, install .NET frameworks, and then you can go to task->compile in the search bar at the top
 
 ---
 # Common fixes
